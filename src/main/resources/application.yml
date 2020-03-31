@@ -1,0 +1,53 @@
+server:
+  port: 8769
+# remote git
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        health:
+          enabled: false
+        git:
+          uri: http://47.94.245.247/team/config-server-file.git
+          searchPaths: config
+          username: root
+          password: 1qaz@wsx
+      label: master
+  security:
+    user:
+      name: admin
+      password: admin
+eureka:
+  instance:
+    prefer-ip-address: true #以IP地址注册到服务中心
+    ip-address: 49.233.195.134
+    instance-id: ${eureka.instance.ip-address}:${spring.application.name}:${server.port}
+  client:
+    registerWithEureka: true #是否将自己注册到Eureka服务中，默认为true
+    fetchRegistry: true #是否从Eureka中获取注册信息，默认为true
+    serviceUrl:
+      defaultZone: http://49.233.195.134:8802/eureka/,http://47.104.219.118:8802/eureka/
+
+#  enabled: false #是否开启actuator安全认证
+# ---native
+#spring:
+#  cloud:
+#    config:
+#      server:
+#        native:
+#          search-locations: classpath:/shared
+#  profiles:
+#     active: native
+#  application:
+#    name: config-server
+#
+## port
+#
+#management:
+#  security:
+#    enabled: false
+
+
+
